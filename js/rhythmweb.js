@@ -159,6 +159,8 @@ function Rhythmweb() {
 	
 	function installClickHandlers(elementLocator, clickFunction, doubleClickFunction) {
 	    // add click handlers to all table elements, current and future
+		// TODO this is commented out due to compatbility issues with latest libraries
+/*
         var agent = navigator.userAgent.toLowerCase();
         if (agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0 || agent.indexOf('android') >= 0){
             // register double tap handler, but don't use the single tap handler as it's broken
@@ -183,6 +185,7 @@ function Rhythmweb() {
                 $(elementLocator).live('dblclick', doubleClickFunction);
             }
         }
+*/
 	}
 	
 	function addTrackTableClickHandlers() {
@@ -239,7 +242,7 @@ function Rhythmweb() {
         $('#main').toggleClass('use-sidebar');
         
         var hasSidebar = $('#main').hasClass('use-sidebar') + '';
-        $.cookie("show_playlist_sidebar", hasSidebar);
+        Cookies.set("show_playlist_sidebar", hasSidebar);
 
 		$('#toggle-playlist-view').toggleClass('active');
     }
@@ -339,9 +342,9 @@ function Rhythmweb() {
 	function initialize() {
 		loadInitialPlayList();
 
-        var playlistViewCookie = $.cookie("show_playlist_sidebar"),
+        var playlistViewCookie = Cookies.get("show_playlist_sidebar"),
         	playBtn = $('#play');
-        if (playlistViewCookie !== null && playlistViewCookie === "true") {
+        if (playlistViewCookie !== undefined && playlistViewCookie === "true") {
             $('#main').addClass('use-sidebar');
         }
 		
